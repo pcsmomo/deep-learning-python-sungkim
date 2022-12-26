@@ -64,4 +64,38 @@ Deep Learning in Python by Sung Kim
 - Letter grade (A, B, C, D, and E) based on time spent
   - multi-label classification
 
+## 3. ML lab 01: TensorFlow install
+
+### install tensorflow
+
+```sh
+poetry self update
+# poetry add tensorflow tensorflow-gpu
+# tensorflow can't be installed on mac m1
+poetry add tensorflow-macos tensorflow-metal  # for mac m1
+
+poetry shell
+python3
+import tensorflow as tf
+tf.__version__
+'2.11.0'
+```
+
+### Check GPU availability
+
+```py
+gpu = len(tf.config.list_physical_devices('GPU'))>0
+print("GPU is", "available" if gpu else "NOT AVAILABLE")
+```
+
+### [Tensor Ranks, Shapes, and Types](https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/r0.7/tensorflow/g3doc/resources/dims_types.md#rank)
+
+| Rank | Math entity                      | Python example                                               |
+| ---- | -------------------------------- | ------------------------------------------------------------ |
+| 0    | Scalar (magnitude only)          | s = 483                                                      |
+| 1    | Vector (magnitude and direction) | v = [1.1, 2.2, 3.3]                                          |
+| 2    | Matrix (table of numbers)        | m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]                        |
+| 3    | 3-Tensor (cube of numbers)       | t = [[[2], [4], [6]], [[8], [10], [12]], [[14], [16], [18]]] |
+| n    | n-Tensor (you get the idea)      | ....                                                         |
+
 </details>
