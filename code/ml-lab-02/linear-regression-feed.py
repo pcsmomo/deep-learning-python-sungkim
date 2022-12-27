@@ -1,6 +1,6 @@
 import tensorflow
 tf = tensorflow.compat.v1
-
+tf.disable_v2_behavior()
 tf.disable_eager_execution()
 
 tf.set_random_seed(777)  # for reproducibility
