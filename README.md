@@ -113,6 +113,12 @@ link: https://www.derivative-calculator.net/
 
 https://holehouse.org/mlclass/01_02_Introduction_regression_analysis_and_gr.html
 
-## Formal definition
+### Formal definition
+
+## 7. ML lab 03: Linear Regression - cost minimum algorithm tensorflow
+
+```sh
+poetry add matplotlib
+```
 
 </details>
