@@ -1,5 +1,4 @@
 # Lab 3 Minimizing Cost
-
 import tensorflow
 import matplotlib.pyplot as plt
 
