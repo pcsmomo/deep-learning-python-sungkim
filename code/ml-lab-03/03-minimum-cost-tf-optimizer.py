@@ -1,35 +1,47 @@
 # Lab 3 Minimizing Cost
 import tensorflow
-import matplotlib.pyplot as plt
 
 tf = tensorflow.compat.v1
 tf.disable_v2_behavior()
 tf.disable_eager_execution()
 
+# tf Graph Input
 X = [1, 2, 3]
 Y = [1, 2, 3]
 
-W = tf.placeholder(tf.float32)
+# Set wrong model weights
+W = tf.Variable(5.0)
 
-# Our hypothesis for linear model X * W
+# Linear model
 hypothesis = X * W
 
 # cost/loss function
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 
-# Variables for plotting cost function
-W_history = []
-cost_history = []
+# Minimize: Gradient Descent Optimizer
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1)
+train = optimizer.minimize(cost)
 
 # Launch the graph in a session.
 with tf.Session() as sess:
-    for i in range(-30, 50):
-        curr_W = i * 0.1
-        curr_cost = sess.run(cost, feed_dict={W: curr_W})
+    # Initializes global variables in the graph.
+    sess.run(tf.global_variables_initializer())
 
-        W_history.append(curr_W)
-        cost_history.append(curr_cost)
+    for step in range(101):
+        _, W_val = sess.run([train, W])
+        print(step, W_val)
 
-# Show the cost function
-plt.plot(W_history, cost_history)
-plt.show()
+"""
+0 1.2666667
+1 1.0177778
+2 1.0011852
+3 1.000079
+4 1.0000052
+5 1.0000004
+6 1.0
+...
+97 1.0
+98 1.0
+99 1.0
+100 1.0
+"""
