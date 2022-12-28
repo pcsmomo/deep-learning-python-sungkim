@@ -10,17 +10,28 @@ X = [1, 2, 3]
 Y = [1, 2, 3]
 
 # Set wrong model weights
-W = tf.Variable(5.0)
+W = tf.Variable(5.)
 
 # Linear model
 hypothesis = X * W
+
+# Manual gradient
+gradient = tf.reduce_mean((W * X - Y) * X) * 2
 
 # cost/loss function
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 
 # Minimize: Gradient Descent Optimizer
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1)
-train = optimizer.minimize(cost)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+
+# Get gradients
+gvs = optimizer.compute_gradients(cost)
+
+# Optional: modify gradient if necessary
+# gvs = [(tf.clip_by_value(grad, -1., 1.), var) for grad, var in gvs]
+
+# Apply gradients
+apply_gradients = optimizer.apply_gradients(gvs)
 
 # Launch the graph in a session.
 with tf.Session() as sess:
@@ -28,20 +39,17 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
     for step in range(101):
-        _, W_val = sess.run([train, W])
-        print(step, W_val)
+        gradient_val, gvs_val, _ = sess.run([gradient, gvs, apply_gradients])
+        print(step, gradient_val, gvs_val)
 
-"""
-0 1.2666667
-1 1.0177778
-2 1.0011852
-3 1.000079
-4 1.0000052
-5 1.0000004
-6 1.0
+'''
+0 37.333336 [(37.333332, 4.6266665)]
+1 33.84889 [(33.84889, 4.2881775)]
+2 30.689657 [(30.689655, 3.981281)]
+3 27.82529 [(27.825289, 3.7030282)]
 ...
-97 1.0
-98 1.0
-99 1.0
-100 1.0
-"""
+97 0.0027837753 [(0.0027837753, 1.0002704)]
+98 0.0025234222 [(0.0025234222, 1.0002451)]
+99 0.0022875469 [(0.0022875469, 1.0002222)]
+100 0.0020739238 [(0.0020739238, 1.0002015)]
+'''
