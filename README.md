@@ -98,4 +98,21 @@ print("GPU is", "available" if gpu else "NOT AVAILABLE")
 | 3    | 3-Tensor (cube of numbers)       | t = [[[2], [4], [6]], [[8], [10], [12]], [[14], [16], [18]]] |
 | n    | n-Tensor (you get the idea)      | ....                                                         |
 
+## 6. ML lec 03: Linear Regression - cost minimum algorithm
+
+### Gradient descent algorithm
+
+- Minimize cost function
+- Gradient descent is used many jinimization problems
+
+### Derivative calculator
+
+link: https://www.derivative-calculator.net/
+
+### Convex function
+
+https://holehouse.org/mlclass/01_02_Introduction_regression_analysis_and_gr.html
+
+## Formal definition
+
 </details>
